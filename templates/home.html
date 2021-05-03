@@ -12,13 +12,13 @@
             <form action="/" method="POST">
                 <div class="coordinate_fields">
                     <label class="form_label">Latitude</label>
-                    <input class="form_input" type="text" name="latitude" id="latitude">
+                    <input class="form_input" type="text" name="latitude" id="latitude" value="{{ lat }}">
                     <label class="form_label">Longitude</label>
-                    <input class="form_input" type="text" name="longitude" id="longitude">
+                    <input class="form_input" type="text" name="longitude" id="longitude" value="{{ lng }}">
                 </div>
                 <div class="date_selector">
                     <label class="form_label">Date</label>
-                    <input class="form_input" type="date" name="date" id="date">
+                    <input class="form_input" type="date" name="date" id="date" value="{{ date }}">
                     <button name="show" value="daylight">show</button>
                 </div>
                 <div class="double_date_selector">
@@ -44,8 +44,10 @@
         let lng;
 
         // using leaflet.js for the map (script source included in base.html template)
-        let mymap = L.map('map').setView([0, 0], 1);
+        // all of the following script is copied from https://leafletjs.com/ and modified a bit
 
+        let mymap = L.map('map').setView([0, 0], 1);
+        
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 18,

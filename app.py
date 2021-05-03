@@ -1,48 +1,11 @@
-from flask import Flask, render_template, request, url_for, flash, redirect
+from flask import Flask, render_template, request, redirect
 from astral import LocationInfo
 from astral.sun import sun
 from datetime import datetime
 import pandas as pd
+import os
 
 app = Flask(__name__)
-
-def show_daylight_helper(lat_str, lng_str, date):
-    if date == "":
-        msg = "Date undefined. Please pick a date."
-        return render_template("home.html", errormsg=msg)
-    try:
-        # test if the given string values can be converted to float (if not -> raises ValueError)
-        float(lat_str)
-        float(lng_str)
-
-        urlString = "/show_daylight/" + lat_str + "/" + lng_str + "/" + date
-        return redirect(urlString)
-    except ValueError:
-        msg = "Could not read the input coordinates."
-        return render_template("home.html", errormsg=msg)
-
-
-def show_graph_helper(lat_str, lng_str, startDate, endDate):
-    if startDate == "" or endDate == "":
-        msg = "Both dates have to be defined for this operation"
-        return render_template("home.html", errormsg=msg)
-
-    sd = string_to_datetime(startDate)
-    ed = string_to_datetime(endDate)
-    if sd >= ed:
-        msg = "End date has to be after start date"
-        return render_template("home.html", errormsg=msg)
-
-    try:
-        # test if the given string values can be converted to float (if not -> raises ValueError)
-        float(lat_str)
-        float(lng_str)
-        urlString = "/show_graph/" + lat_str + "/" + lng_str + "/" + startDate + "/" + endDate
-        return redirect(urlString)
-    except ValueError:
-        msg = "Could not read the input coordinates."
-        return render_template("home.html", errormsg=msg)
-
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -79,6 +42,7 @@ def show_daylight(lat, lng, date):
     params = {"lat": round(lat, 5), "lng": round(lng, 5), "date": date}
     return render_template("show_daylight.html", params=params, result=result)
 
+
 @app.route("/show_graph/<string:lat>/<string:lng>/<string:startDate>/<string:endDate>")
 def show_graph(lat, lng, startDate, endDate):
     lat = float(lat)
@@ -92,6 +56,44 @@ def show_graph(lat, lng, startDate, endDate):
         msg = "During this time period is a day, when the s" + str(e)[1:]
         return render_template("home.html", errormsg=msg)
     return render_template("show_daylight_graph.html", params=params, result=chart_data)
+
+
+def show_daylight_helper(lat_str, lng_str, date):
+    if date == "":
+        msg = "Date undefined. Please pick a date."
+        return render_template("home.html", errormsg=msg, lat=lat_str, lng=lng_str)
+    try:
+        # test if the given string values can be converted to float (if not -> raises ValueError)
+        float(lat_str)
+        float(lng_str)
+
+        urlString = "/show_daylight/" + lat_str + "/" + lng_str + "/" + date
+        return redirect(urlString)
+    except ValueError:
+        msg = "Could not read the input coordinates."
+        return render_template("home.html", errormsg=msg)
+
+
+def show_graph_helper(lat_str, lng_str, startDate, endDate):
+    if startDate == "" or endDate == "":
+        msg = "Both dates have to be defined for this operation"
+        return render_template("home.html", errormsg=msg, lat=lat_str, lng=lng_str)
+
+    sd = string_to_datetime(startDate)
+    ed = string_to_datetime(endDate)
+    if sd >= ed:
+        msg = "End date has to be after start date"
+        return render_template("home.html", errormsg=msg, lat=lat_str, lng=lng_str)
+
+    try:
+        # test if the given string values can be converted to float (if not -> raises ValueError)
+        float(lat_str)
+        float(lng_str)
+        urlString = "/show_graph/" + lat_str + "/" + lng_str + "/" + startDate + "/" + endDate
+        return redirect(urlString)
+    except ValueError:
+        msg = "Could not read the input coordinates."
+        return render_template("home.html", errormsg=msg)
 
 
 def duration_in_hours(time_string):

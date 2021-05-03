@@ -12,6 +12,7 @@
     <script>
 
         // passing the python dict from app.py through JSON format
+        // got these lines from stackoverflow
         let timeRange = JSON.parse('{{result["date_range"] | tojson}}');
         let daylightRange = JSON.parse('{{result["daylight_range"] | tojson}}');
 
@@ -31,6 +32,7 @@
         });
 
         // take the viewer to the bottom of the page automatically to see the results
-        window.scrollTo(0,document.body.scrollHeight);
+        // got this line from stackoverflow
+        window.scrollTo(0, document.body.scrollHeight);
     </script>
 {% endblock %}

@@ -15,8 +15,7 @@
 
         marker = new L.Marker([lat, lng], {draggable: true});
         mymap.addLayer(marker);
-        marker.bindPopup("(" + lat.toFixed(5) + ", " + lng.toFixed(5) + ")").openPopup();
-
+        
         mymap.setView([lat, lng], 3);
 
         // fill the form input fields with given values again, for user convenience
