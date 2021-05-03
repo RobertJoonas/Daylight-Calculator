@@ -10,4 +10,4 @@ A application for calculating daylight period. Python Flask, HTML, CSS, JS
 
 
 ## To run the app:
-* **windows:** `$python app.py`
+* `$python app.py`
