@@ -1,0 +1,18 @@
+{% extends "show.html" %}
+{% block results %}
+    <div class="results">
+        <div class="results_container">
+            <span class="result_item">Daylight: {{ result["daylight"] }}</span>
+            <span class="result_item">Sunrise: {{ result["sunrise"] }}</span>
+            <span class="result_item">Sunset: {{ result["sunset"] }}</span>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extraScript%}
+    <script>
+        // take the viewer to the bottom of the page automatically to see the results
+        window.scrollTo(0, document.body.scrollHeight);
+    </script>
+{% endblock %}
+

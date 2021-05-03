@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <div class="page_container">
+        {% if errormsg != None %}
+            <div class="errormsg_container">
+                <div class="errormsg">{{ errormsg }}</div>
+            </div>
+        {% endif %}
+        <div class="form_container">
+            <form action="/" method="POST">
+                <div class="coordinate_fields">
+                    <label class="form_label">Latitude</label>
+                    <input class="form_input" type="text" name="latitude" id="latitude">
+                    <label class="form_label">Longitude</label>
+                    <input class="form_input" type="text" name="longitude" id="longitude">
+                </div>
+                <div class="date_selector">
+                    <label class="form_label">Date</label>
+                    <input class="form_input" type="date" name="date" id="date">
+                    <button name="show" value="daylight">show</button>
+                </div>
+                <div class="double_date_selector">
+                    <label class="form_label">Start date</label>
+                    <input class="form_input" type="date" name="startDate" id="startDate">
+                    <label class="form_label">End date</label>
+                    <input class="form_input" type="date" name="endDate" id="endDate">
+                    <button name="show" value="graph">show graph</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="map">
+        <div id="map"></div>
+    </div>
+    {% block results %} {% endblock %}
+
+    <script>
+
+        let marker;
+        let lat;
+        let lng;
+
+        // using leaflet.js for the map (script source included in base.html template)
+        let mymap = L.map('map').setView([0, 0], 1);
+
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: 'pk.eyJ1Ijoicm9iZXJ0am8iLCJhIjoiY2tvNGQ3eHU1MHpucjJ2czI0d2F2ZGdydSJ9.Q9QZaNdLdKfg-TMg9GoHvg'
+        }).addTo(mymap);
+
+        mymap.on('click', onMapClick);
+
+        function onMapClick(e) {
+            if (marker != null) {
+                mymap.removeLayer(marker)
+            }
+
+            marker = new L.Marker(e.latlng, {draggable: false});
+            mymap.addLayer(marker);
+            lat = e.latlng.lat;
+            lng = e.latlng.lng;
+
+            document.getElementById("latitude").value = lat.toFixed(5);
+            document.getElementById("longitude").value = lng.toFixed(5);
+
+        }
+
+    </script>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

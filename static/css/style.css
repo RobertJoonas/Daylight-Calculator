@@ -1,0 +1,98 @@
+.info {
+  text-align: center;
+}
+
+.info_container {
+  margin: 2px;
+}
+
+.reference {
+  font-weight: bold;
+  background-color: #ddd;
+  border-radius: 5px;
+  padding: 1px 5px;
+}
+
+.chart {
+  display: inline-block;
+  width: 800px;
+  border-radius: 5px;
+  border: 3px gray solid;
+}
+
+.graph-container {
+  text-align: center;
+}
+
+.errormsg_container {
+  text-align: center;
+}
+
+.errormsg {
+  display: inline-block;
+  font-weight: bold;
+  color: red;
+  border-radius: 3px;
+  width: max-content;
+  text-align: center;
+  padding: 2px 5px;
+}
+
+.form_input {
+  padding: 3px;
+  margin: 5px;
+}
+
+.heading {
+  text-align: center;
+}
+
+.results {
+  text-align: center;
+}
+
+.results_container {
+  margin: 10px;
+  width: max-content;
+  display: inline-block;
+}
+
+.result_item {
+  padding: 5px 10px;
+  margin: 10px;
+  border: 2px solid gray;
+  border-radius: 5px;
+}
+
+.coordinate_fields {
+  display: inline-block;
+  grid-gap: 10px;
+  background-color: #fff;
+  color: #444;
+}
+
+.form_container {
+  display: inline-block;
+  padding: 4px;
+  margin: 4px;
+}
+
+.map {
+  text-align: center;
+}
+
+#map {
+  display: inline-block;
+  height: 400px;
+  width: 600px;
+}
+
+.page_container {
+  text-align: center;
+
+  display: block;
+  grid-template-columns: max-content max-content auto;
+  grid-gap: 10px;
+  background-color: #fff;
+  color: #444;
+}

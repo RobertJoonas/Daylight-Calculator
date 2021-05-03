@@ -1,0 +1,36 @@
+{% extends "show.html" %}
+
+{% block results %}
+    <div class="graph-container">
+        <div class="chart">
+            <canvas id="chart"></canvas>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extraScript %}
+    <script>
+
+        // passing the python dict from app.py through JSON format
+        let timeRange = JSON.parse('{{result["date_range"] | tojson}}');
+        let daylightRange = JSON.parse('{{result["daylight_range"] | tojson}}');
+
+        let chart = document.getElementById("chart").getContext("2d");
+
+        // using chart.js here (script source included in base.html template)
+        let daylightGraph = new Chart(chart, {
+            type: "line",
+            data: {
+                labels: timeRange,
+                datasets: [{
+                    label: "duration in hours",
+                    data: daylightRange
+                }]
+            },
+            options: {}
+        });
+
+        // take the viewer to the bottom of the page automatically to see the results
+        window.scrollTo(0,document.body.scrollHeight);
+    </script>
+{% endblock %}

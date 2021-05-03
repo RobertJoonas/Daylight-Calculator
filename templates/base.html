@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.1/dist/chart.min.js"></script>
+    {% block head %} {% endblock %}
+</head>
+<body>
+    <div class="heading">
+        <h1>DAYLIGHT CALCULATOR</h1>
+    </div>
+    <div class="info">
+        <div class="info_container">
+            <p>Enter coordinates, or pick a location by clicking on the map.</p>
+            <p>To see daylight duration on a specific date, enter a date and click <span class="reference">show</span></p>
+            <p>For daylight duration graph, enter the start/end dates and click <span class="reference">show graph</span></p>
+        </div>
+    </div>
+
+    {% block body %} {% endblock %}
+
+    {% block script %} {% endblock %}
+
+</body>
+</html>
