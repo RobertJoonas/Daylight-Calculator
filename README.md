@@ -1,5 +1,5 @@
 # Daylight-Calculator
-A application for calculating daylight period. Python Flask, HTML, CSS, JS
+An application for calculating daylight period. Python Flask, HTML, CSS, JS
 
 ## Required for running the application:
 
