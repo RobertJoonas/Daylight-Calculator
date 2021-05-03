@@ -3,15 +3,8 @@ from astral import LocationInfo
 from astral.sun import sun
 from datetime import datetime
 import pandas as pd
-import os
 
 app = Flask(__name__)
-app.secret_key = "6d506b69907147099300d91fccac815d"
-
-sunrise = ""
-sunset = ""
-daylight = ""
-
 
 def show_daylight_helper(lat_str, lng_str, date):
     if date == "":
